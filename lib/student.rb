@@ -34,7 +34,7 @@ class Student
   
   def self.create_table
     sql = <<-SQL
-    CREATE TABLE IF NOT EXISTS students (
+      CREATE TABLE IF NOT EXISTS students (
       id INTEGER PRIMARY KEY,
       name TEXT,
       grade TEXT
@@ -49,7 +49,7 @@ class Student
     DB[:conn].execute(sql)
   end
 
-  def self.count_all_students_in_grade_9
+  def self.all_students_in_grade_9
     sql = <<-SQL
        SELECT * 
        FROM students
@@ -88,7 +88,10 @@ class Student
 
   def self.first_X_students_in_grade_10(x)
     sql = <<-SQL
-       SELECT * FROM students WHERE grade = 10 LIMIT ?
+       SELECT * 
+       FROM students 
+       WHERE grade = 10 
+       LIMIT ?
     SQL
 
      s = DB[:conn].execute(sql, x)
@@ -104,7 +107,9 @@ class Student
 
    def self.all_students_in_grade_X(grade)
     sql = <<-SQL
-       SELECT * FROM students WHERE grade = ?
+       SELECT * 
+       FROM students 
+       WHERE grade = ?
     SQL
 
      DB[:conn].execute(sql, grade)
